@@ -7,7 +7,6 @@ class TaskListStore {
 
   @action
   addTodo(title) {
-    console.log("addTodo");
     this.tasks.push(new TaskStore(title));
   }
 }
