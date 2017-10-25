@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { observable, action } from "mobx";
 import { observer } from "mobx-react";
 
+import Task from "./Task";
+
 @observer
 class TaskList extends Component {
   @observable newTaskTitle = "";
@@ -32,8 +34,8 @@ class TaskList extends Component {
           <button type="submit">Add</button>
         </form>
         <ul>
-          {this.props.store.tasks.map(todo => (
-            <li key={todo.id}>{todo.title}</li>
+          {this.props.store.tasks.map(task => (
+            <Task key={task.id} task={task} />
           ))}
         </ul>
       </div>
