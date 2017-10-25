@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import DevTools from "mobx-react-devtools";
+
+import TaskList from "./components/TaskList";
+import TaskListStore from "./stores/TaskListStore";
+
+const store = new TaskListStore();
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        Hello world
-        <DevTools />
+        <TaskList store={store} />
       </div>
     );
   }
