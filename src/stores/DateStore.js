@@ -3,7 +3,11 @@ import moment from "moment";
 
 class DateStore {
   date = moment().locale("ja");
-  @observable formatedDate = this.date.format("YYYY/MM/DD");
+  @observable formatedDate;
+
+  constructor() {
+    this.formatedDate = this.date.format("YYYY/MM/DD");
+  }
 
   @action
   changeDate(days) {
