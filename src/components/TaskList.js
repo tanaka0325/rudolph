@@ -25,7 +25,7 @@ class TaskList extends Component {
   render() {
     return (
       <div>
-        <h2>TaskList</h2>
+        <h2>{this.props.dateStore.localDateString} TaskList</h2>
         <form onSubmit={this.handleOnSubmit}>
           <input
             type="text"
