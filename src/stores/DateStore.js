@@ -1,16 +1,14 @@
-import { observable, computed, action } from "mobx";
+import { observable, action } from "mobx";
+import moment from "moment";
 
 class DateStore {
-  @observable date = new Date();
-
-  @computed
-  get localDateString() {
-    return this.date.toLocaleDateString();
-  }
+  date = moment().locale("ja");
+  @observable formatedDate = this.date.format("YYYY/MM/DD");
 
   @action
-  changeDate() {
-    this.date = new Date(1962, 6, 7);
+  changeDate(days) {
+    this.date.add(days, "days");
+    this.formatedDate = this.date.format("YYYY/MM/DD");
   }
 }
 

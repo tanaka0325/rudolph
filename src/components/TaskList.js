@@ -23,15 +23,16 @@ class TaskList extends Component {
   };
 
   @action
-  handleOnClick = e => {
-    this.props.store.dateStore.changeDate();
+  handleOnChangeDate = days => {
+    this.props.store.dateStore.changeDate(days);
   };
 
   render() {
     return (
       <div>
-        <h2>{this.props.store.dateStore.localDateString}: TaskList</h2>
-        <button onClick={this.handleOnClick}>changeDate</button>
+        <h2>{this.props.store.dateStore.formatedDate}: TaskList</h2>
+        <button onClick={() => this.handleOnChangeDate(-1)}>yesterday</button>
+        <button onClick={() => this.handleOnChangeDate(1)}>tomorrow</button>
         <form onSubmit={this.handleOnSubmit}>
           <input
             type="text"
