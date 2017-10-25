@@ -22,10 +22,16 @@ class TaskList extends Component {
     this.newTaskTitle = e.target.value;
   };
 
+  @action
+  handleOnClick = e => {
+    this.props.store.dateStore.changeDate();
+  };
+
   render() {
     return (
       <div>
-        <h2>{this.props.dateStore.localDateString} TaskList</h2>
+        <h2>{this.props.store.dateStore.localDateString}: TaskList</h2>
+        <button onClick={this.handleOnClick}>changeDate</button>
         <form onSubmit={this.handleOnSubmit}>
           <input
             type="text"
