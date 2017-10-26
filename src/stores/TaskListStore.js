@@ -18,7 +18,7 @@ class TaskListStore {
   async addTask(title) {
     const task = new TaskStore(title);
     this.tasks.push(task);
-    const docRef = await this.db.add(toJS(task));
+    const docRef = await this.db.add(this.dateStore.formatedDate, toJS(task));
   }
 
   @action

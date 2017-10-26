@@ -27,11 +27,13 @@ export default class firestoreClient {
     });
   }
 
-  add(task) {
+  add(date, task) {
     task.created_at = new Date();
     return new Promise(resolve => {
       this.db
-        .collection(this.dbName)
+        .collection("date")
+        .doc(date)
+        .collection("tasks")
         .add(task)
         .then(docRef => {
           resolve(docRef);
