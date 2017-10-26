@@ -1,4 +1,4 @@
-import { observable, action } from "mobx";
+import { observable, action, toJS } from "mobx";
 
 import firestoreClient from "../firebase/firestoreClient";
 import TaskStore from "./TaskStore";
@@ -16,8 +16,9 @@ class TaskListStore {
 
   @action
   async addTask(title) {
-    this.tasks.push(new TaskStore(title));
-    // const docRef = await this.db.add(title);
+    const task = new TaskStore(title);
+    this.tasks.push(task);
+    const docRef = await this.db.add(toJS(task));
   }
 
   @action

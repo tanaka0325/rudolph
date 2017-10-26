@@ -4,7 +4,6 @@ import { firebaseConfig } from "./config";
 
 require("firebase/firestore");
 firebase.initializeApp(firebaseConfig);
-// export const db = firebase.firestore();
 
 export default class firestoreClient {
   dbName;
@@ -28,11 +27,12 @@ export default class firestoreClient {
     });
   }
 
-  add(title) {
+  add(task) {
+    task.created_at = new Date();
     return new Promise(resolve => {
       this.db
         .collection(this.dbName)
-        .add({ title })
+        .add(task)
         .then(docRef => {
           resolve(docRef);
         })

@@ -7,6 +7,7 @@ class TaskStore {
   id = generate(url, 12);
   @observable title;
   @observable finished = false;
+  @observable star = false;
 
   constructor(title) {
     this.title = title;
