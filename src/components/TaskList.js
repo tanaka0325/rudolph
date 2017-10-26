@@ -12,7 +12,7 @@ class TaskList extends Component {
   handleOnSubmit = e => {
     e.preventDefault();
     if (this.newTaskTitle !== "") {
-      this.props.store.addTodo(this.newTaskTitle);
+      this.props.store.addTask(this.newTaskTitle);
       this.newTaskTitle = "";
     }
   };
