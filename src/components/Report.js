@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { observable, action } from "mobx";
 import { observer } from "mobx-react";
+import * as remark from "remark";
+import * as reactRenderer from "remark-react";
 
 @observer
 class Report extends Component {
-  @observable newText = "";
+  @observable newText = "# hello world";
 
   handleOnChange = e => {
     this.newText = e.target.value;
@@ -30,6 +32,13 @@ class Report extends Component {
           </label>
           <button type="submit">send</button>
         </form>{" "}
+        <div>
+          {
+            remark()
+              .use(reactRenderer)
+              .processSync(this.newText).contents
+          }
+        </div>
       </div>
     );
   }
