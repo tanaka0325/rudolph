@@ -19,6 +19,7 @@ export default class firestoreClient {
         .collection("date")
         .doc(date)
         .collection(this.dbName)
+        .orderBy("created_at", "desc")
         .get()
         .then(querySnapshot => {
           resolve(querySnapshot);

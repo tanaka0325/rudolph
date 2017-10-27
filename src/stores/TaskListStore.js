@@ -17,6 +17,7 @@ class TaskListStore {
   @action
   async addTask(title) {
     const task = new TaskStore({ title });
+    this.tasks.unshift(task);
     const docRef = await this.db.add(this.dateStore.formatedDate, toJS(task));
   }
 
