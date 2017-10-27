@@ -16,8 +16,7 @@ class TaskListStore {
 
   @action
   async addTask(title) {
-    const task = new TaskStore(title);
-    this.tasks.push(task);
+    const task = new TaskStore({ title });
     const docRef = await this.db.add(this.dateStore.formatedDate, toJS(task));
   }
 
@@ -25,7 +24,7 @@ class TaskListStore {
   async fetchTasks(date) {
     const qs = await this.db.fetch(this.dateStore.formatedDate);
     qs.forEach(doc => {
-      this.tasks.push(new TaskStore(doc.data().title));
+      this.tasks.push(new TaskStore(doc.data()));
     });
   }
 }

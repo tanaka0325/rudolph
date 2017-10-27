@@ -30,7 +30,6 @@ export default class firestoreClient {
   }
 
   add(date, task) {
-    task.created_at = new Date();
     return new Promise(resolve => {
       this.db
         .collection("date")
