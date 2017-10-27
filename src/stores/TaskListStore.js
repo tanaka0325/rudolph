@@ -4,27 +4,31 @@ import firestoreClient from "../firebase/firestoreClient";
 import TaskStore from "./TaskStore";
 
 class TaskListStore {
-  dateStore;
+  dailyReportStore;
   db;
   @observable tasks = [];
 
-  constructor(dateStore) {
-    this.dateStore = dateStore;
+  constructor(dailyReportStore) {
+    this.dailyReportStore = dailyReportStore;
     this.db = new firestoreClient("tasks");
-    this.fetchTasks();
+    this.fetch(dailyReportStore.dateStore.formatedDate);
   }
 
   @action
   async addTask(title) {
     const task = new TaskStore({ title });
     this.tasks.unshift(task);
-    const docRef = await this.db.add(this.dateStore.formatedDate, toJS(task));
+    const docRef = await this.db.add(
+      this.dailyReportStore.dateStore.formatedDate,
+      toJS(task)
+    );
     console.debug(docRef);
   }
 
   @action
-  async fetchTasks(date) {
-    const qs = await this.db.fetch(this.dateStore.formatedDate);
+  async fetch(date) {
+    this.tasks = [];
+    const qs = await this.db.fetch(date);
     qs.forEach(doc => {
       this.tasks.push(new TaskStore(doc.data()));
     });

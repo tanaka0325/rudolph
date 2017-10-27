@@ -6,24 +6,40 @@ const generate = require("nanoid/generate");
 const url = require("nanoid/url");
 
 class ReportStore {
-  dateStore;
+  dailyReportStore;
   db;
   id = generate(url, 12);
+  created_at;
   @observable text = "";
 
-  constructor(dateStore) {
-    this.dateStore = dateStore;
+  constructor(dailyReportStore) {
+    this.dailyReportStore = dailyReportStore;
     this.db = new firestoreClient("reports");
+    this.fetch(dailyReportStore.dateStore.formatedDate);
   }
 
   @action
-  async addReport(text) {
+  async addReport() {
     const report = {
       id: this.id,
-      text
+      text: this.text,
+      created_at: new Date()
     };
-    const docRef = await this.db.add(this.dateStore.formatedDate, report);
+    console.info(report);
+    const docRef = await this.db.add(
+      this.dailyReportStore.dateStore.formatedDate,
+      report
+    );
     console.debug(docRef);
+  }
+
+  @action
+  async fetch(date) {
+    this.text = "";
+    const qs = await this.db.fetch(date);
+    qs.forEach(doc => {
+      this.text = doc.data().text;
+    });
   }
 }
 

@@ -2,16 +2,18 @@ import { observable, action } from "mobx";
 import moment from "moment";
 
 class DateStore {
+  dailyReportStore;
   date = moment().locale("ja");
   format = "YYYY-MM-DD";
   @observable formatedDate;
 
-  constructor() {
+  constructor(dailyReportStore) {
+    this.dailyReportStore = dailyReportStore;
     this.formatedDate = this.date.format(this.format);
   }
 
   @action
-  changeDate(days) {
+  moveDays(days) {
     this.date.add(days, "days");
     this.formatedDate = this.date.format(this.format);
   }

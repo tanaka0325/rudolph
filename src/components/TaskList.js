@@ -12,7 +12,7 @@ class TaskList extends Component {
   handleOnSubmit = e => {
     e.preventDefault();
     if (this.newTaskTitle !== "") {
-      this.props.store.addTask(this.newTaskTitle);
+      this.props.store.taskListStore.addTask(this.newTaskTitle);
       console.info("sended task");
       this.newTaskTitle = "";
     }
@@ -25,7 +25,7 @@ class TaskList extends Component {
 
   @action
   handleOnChangeDate = days => {
-    this.props.store.dateStore.changeDate(days);
+    this.props.store.moveDays(days);
   };
 
   render() {
@@ -43,7 +43,7 @@ class TaskList extends Component {
           <button type="submit">Add</button>
         </form>
         <ul>
-          {this.props.store.tasks.map(task => (
+          {this.props.store.taskListStore.tasks.map(task => (
             <Task key={task.id} task={task} />
           ))}
         </ul>
