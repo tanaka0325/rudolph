@@ -13,9 +13,11 @@ export default class firestoreClient {
     this.db = firebase.firestore();
   }
 
-  fetch() {
+  fetch(date) {
     return new Promise(resolve => {
       this.db
+        .collection("date")
+        .doc(date)
         .collection(this.dbName)
         .get()
         .then(querySnapshot => {
@@ -33,7 +35,7 @@ export default class firestoreClient {
       this.db
         .collection("date")
         .doc(date)
-        .collection("tasks")
+        .collection(this.dbName)
         .add(task)
         .then(docRef => {
           resolve(docRef);
