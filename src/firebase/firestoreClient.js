@@ -30,13 +30,13 @@ export default class firestoreClient {
     });
   }
 
-  add(date, task) {
+  add(date, payload) {
     return new Promise(resolve => {
       this.db
         .collection("date")
         .doc(date)
         .collection(this.dbName)
-        .add(task)
+        .add(payload)
         .then(docRef => {
           resolve(docRef);
         })

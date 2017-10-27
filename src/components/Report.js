@@ -16,7 +16,8 @@ class Report extends Component {
   handleOnSubmit = e => {
     e.preventDefault();
     if (this.newText !== "") {
-      console.debug("post report");
+      this.props.store.addReport(this.newText);
+      console.info("sended report");
       this.newText = "";
     }
   };

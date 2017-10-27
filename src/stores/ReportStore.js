@@ -1,25 +1,29 @@
-import { observable, action, toJS } from "mobx";
+import { observable, action } from "mobx";
+
+import firestoreClient from "../firebase/firestoreClient";
 
 const generate = require("nanoid/generate");
 const url = require("nanoid/url");
 
 class ReportStore {
   dateStore;
-
+  db;
   id = generate(url, 12);
   @observable text = "";
 
   constructor(dateStore) {
     this.dateStore = dateStore;
+    this.db = new firestoreClient("reports");
   }
 
   @action
-  addReport() {
+  async addReport(text) {
     const report = {
       id: this.id,
-      text: this.text
+      text
     };
-    console.debug(report);
+    const docRef = await this.db.add(this.dateStore.formatedDate, report);
+    console.debug(docRef);
   }
 }
 

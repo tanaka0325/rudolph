@@ -13,6 +13,7 @@ class TaskList extends Component {
     e.preventDefault();
     if (this.newTaskTitle !== "") {
       this.props.store.addTask(this.newTaskTitle);
+      console.info("sended task");
       this.newTaskTitle = "";
     }
   };
