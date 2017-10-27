@@ -12,12 +12,12 @@ const reportStore = new ReportStore(dateStore);
 
 class App extends Component {
   render() {
-    return (
-      <div className="App">
+    return [
+      <main key="main" className="container">
         <TaskList store={taskListStore} />
         <Report store={reportStore} />
-      </div>
-    );
+      </main>
+    ];
   }
 }
 
